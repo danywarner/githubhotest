@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class InputViewController: UIViewController {
 
@@ -21,14 +22,19 @@ class InputViewController: UIViewController {
 
     @IBAction func performLanguageRequest(sender: AnyObject) {
         if let language = textField.text {
-            reposSearchUrl.appendContentsOf(language)
+            reposSearchUrl.appendContentsOf(language.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
             print(reposSearchUrl)
             
             
             Alamofire.request(.GET, reposSearchUrl)
                 .responseJSON { response in
-                    if let dict = response.result.value as? Dictionary<String, AnyObject> {
-                        print(dict.debugDescription)
+                    if let items = response.result.value as? Dictionary<String, AnyObject> {
+                        var itemsArray = items["items"] as? Array<AnyObject>
+                        for var x = 0 ; x < itemsArray!.count ; x++ {
+                            if let repo = itemsArray![x]["name"] {
+                                print(repo)
+                            }
+                        }
                     }
             }
         }
