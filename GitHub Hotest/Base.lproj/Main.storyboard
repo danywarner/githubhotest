@@ -123,13 +123,41 @@
                                 <rect key="frame" x="0.0" y="107" width="600" height="493"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FBe-tp-JbY">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="FBe-tp-JbY" customClass="RepoCell" customModule="GitHub_Hotest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FBe-tp-JbY" id="buL-Zt-5e5">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RVM-Qh-2cS">
+                                                    <rect key="frame" x="8" y="0.0" width="43" height="43"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="UtS-bc-374"/>
+                                                        <constraint firstAttribute="width" constant="43" id="sZN-pV-jkI"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEQ-8J-AJb">
+                                                    <rect key="frame" x="71" y="11" width="240" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="240" id="ELn-jU-YUg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RVM-Qh-2cS" firstAttribute="top" secondItem="buL-Zt-5e5" secondAttribute="top" id="MVk-t6-hjA"/>
+                                                <constraint firstItem="RVM-Qh-2cS" firstAttribute="leading" secondItem="buL-Zt-5e5" secondAttribute="leadingMargin" id="PWp-kJ-bGI"/>
+                                                <constraint firstItem="WEQ-8J-AJb" firstAttribute="leading" secondItem="RVM-Qh-2cS" secondAttribute="trailing" constant="20" id="kPy-Lp-LwC"/>
+                                                <constraint firstItem="WEQ-8J-AJb" firstAttribute="top" secondItem="buL-Zt-5e5" secondAttribute="topMargin" constant="3" id="pXU-Il-nLh"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatar" destination="RVM-Qh-2cS" id="4cz-U4-O4O"/>
+                                            <outlet property="repoNameLbl" destination="WEQ-8J-AJb" id="clO-3o-JzY"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
