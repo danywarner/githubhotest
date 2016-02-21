@@ -37,6 +37,7 @@ class InputViewController: UIViewController {
                 if let requestUrl = sender as? String {
                     
                     repoListVC.requestUrl = requestUrl
+                    repoListVC.language = textField.text
                 }
             }
         }

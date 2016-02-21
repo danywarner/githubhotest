@@ -13,7 +13,9 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var repoListTitle: UILabel!
     
+    var language: String!
     var repositories = [Repository]()
     private var _requestUrl: String?
     
@@ -35,6 +37,7 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        repoListTitle.text = "\(language) repositories"
         downloadReposData()
         tableView.reloadData()
     }
@@ -45,6 +48,10 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        var repo: Repository
+        repo = repositories[indexPath.row]
+        performSegueWithIdentifier("repoDetailVC", sender: repo)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -61,6 +68,20 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         } else {
             return RepoCell()
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "repoDetailVC" {
+            
+            if let repoDetailVC = segue.destinationViewController as? RepoDetailVC {
+                
+                if let repo = sender as? Repository {
+                    
+                    repoDetailVC.repository = repo
+                }
+            }
+        }
+
     }
     
     
