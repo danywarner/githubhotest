@@ -7,35 +7,37 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 class InputViewController: UIViewController {
 
+    var reposSearchUrl = DataService.languageReposSearchUrl
     @IBOutlet weak var textField: UITextField!
-    var reposSearchUrl = DataService.languageReposSearchUrl;
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    @IBAction func performLanguageRequest(sender: AnyObject) {
-        if let language = textField.text {
-            reposSearchUrl.appendContentsOf(language.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
-            print(reposSearchUrl)
+    
+    @IBAction func goButtonPressed(sender: AnyObject) {
+        if let language = textField.text where language != "" {
             
+            var requestUrl=reposSearchUrl
+            requestUrl.appendContentsOf(language.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()))
             
-            Alamofire.request(.GET, reposSearchUrl)
-                .responseJSON { response in
-                    if let items = response.result.value as? Dictionary<String, AnyObject> {
-                        var itemsArray = items["items"] as? Array<AnyObject>
-                        for var x = 0 ; x < itemsArray!.count ; x++ {
-                            if let repo = itemsArray![x]["name"] {
-                                print(repo)
-                            }
-                        }
-                    }
+            performSegueWithIdentifier("repoListVC", sender: requestUrl)
+        }
+        
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "repoListVC" {
+            
+            if let repoListVC = segue.destinationViewController as? RepoListVC {
+                
+                if let requestUrl = sender as? String {
+                    
+                    repoListVC.requestUrl = requestUrl
+                }
             }
         }
     }

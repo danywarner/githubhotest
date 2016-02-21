@@ -51,8 +51,7 @@
                                 </constraints>
                                 <state key="normal" title="Go"/>
                                 <connections>
-                                    <action selector="performLanguageRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q2F-hh-mY6"/>
-                                    <segue destination="Lty-ZH-PLf" kind="show" id="mgm-jV-dwO"/>
+                                    <action selector="goButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0vB-4z-cyl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -81,6 +80,7 @@
                     <navigationItem key="navigationItem" id="a8a-xv-nS2"/>
                     <connections>
                         <outlet property="textField" destination="13P-f2-8qI" id="t5G-bl-1yA"/>
+                        <segue destination="Lty-ZH-PLf" kind="show" identifier="repoListVC" id="rMx-6l-mIv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -123,7 +123,7 @@
                                 <rect key="frame" x="0.0" y="107" width="600" height="493"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="FBe-tp-JbY" customClass="RepoCell" customModule="GitHub_Hotest" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RepoCell" id="FBe-tp-JbY" customClass="RepoCell" customModule="GitHub_Hotest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FBe-tp-JbY" id="buL-Zt-5e5">
@@ -173,6 +173,9 @@
                             <constraint firstItem="qQV-rx-kJq" firstAttribute="top" secondItem="0QC-WF-2um" secondAttribute="bottom" id="xDY-kd-1E5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="qQV-rx-kJq" id="AXU-U9-zuU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wF3-Rv-C1d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

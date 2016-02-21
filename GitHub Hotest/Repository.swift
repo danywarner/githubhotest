@@ -13,10 +13,10 @@ class Repository {
     
     private var _name: String
     private var _avatarUrl: String
-    private var _description: String
+    private var _repoDescription: String
     private var _author: String
-    private var _top3contributors: [String]?
-    private var _latest3issues: [Issue]?
+    private var _contributorsUrl: String
+    private var _issuesUrl: String
     
     var name: String {
         get {
@@ -27,12 +27,12 @@ class Repository {
         }
     }
     
-    var description: String {
+    var repoDescription: String {
         get {
-            return _description
+            return _repoDescription
         }
         set {
-            _description = newValue
+            _repoDescription = newValue
         }
     }
     
@@ -54,40 +54,33 @@ class Repository {
         }
     }
     
-    var top3contributors: [String] {
+    var contributorsUrl: String {
         get {
-            if _top3contributors != nil {
-                return _top3contributors!
-            } else {
-                return [String]()
-            }
-            
+            return _contributorsUrl
         }
         set {
-            _top3contributors = newValue
+            _contributorsUrl = newValue
         }
     }
     
-    var latest3issues: [Issue] {
+    var issuesUrl: String {
         get {
-            if _latest3issues != nil {
-                return _latest3issues!
-            } else {
-                return [Issue]()
-            }
+            return _issuesUrl
             
         }
         set {
-            _latest3issues = newValue
+            _issuesUrl = newValue
         }
     }
     
     
-    init(name: String, avatarUrl: String, description: String, author: String) {
+    init(name: String, avatarUrl: String, description: String, author: String, contributorsUrl: String, issuesUrl: String) {
         _name = name
         _avatarUrl = avatarUrl
-        _description = description
+        _repoDescription = description
         _author = author
+        _contributorsUrl = contributorsUrl
+        _issuesUrl = issuesUrl
     }
     
     

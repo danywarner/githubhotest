@@ -17,7 +17,7 @@ class RepoCell: UITableViewCell {
    
     func configureCell(repo: Repository) {
         repoNameLbl.text = repo.name
-        
+        //print("configuring....\(repo.name)")
         Alamofire.request(.GET, repo.avatarUrl).response(completionHandler: {
             request, response, data, err in
             
