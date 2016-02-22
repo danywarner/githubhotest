@@ -15,9 +15,19 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var repoListTitle: UILabel!
     
-    var language: String!
-    var repositories = [Repository]()
+    private var _language: String!
+    private var repositories = [Repository]()
     private var _requestUrl: String?
+    
+    var language: String {
+        get {
+            return _language
+        }
+        set {
+            _language = newValue
+        }
+    }
+    
     
     var requestUrl: String {
         get {
@@ -26,7 +36,6 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             } else {
                 return ""
             }
-            
         }
         set {
             _requestUrl = newValue
@@ -70,6 +79,7 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    //passing the selected repository as a parameter to the next view
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "repoDetailVC" {
             
@@ -104,9 +114,7 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                                 }
                             }
                         }
-                    } else {
-                        
-                    }
+                    } 
                 }
           self.tableView.reloadData()
         }
