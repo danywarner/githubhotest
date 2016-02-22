@@ -51,7 +51,6 @@ class RepoDetailVC: UIViewController {
     }
     
     func downloadContributors() {
-        print(repository.contributorsUrl)
         Alamofire.request(.GET, repository.contributorsUrl).responseJSON { response in
             
                 if let contributors = response.result.value as? Array<AnyObject> {
@@ -73,7 +72,6 @@ class RepoDetailVC: UIViewController {
         let index1 = issuesUrl.startIndex.advancedBy(intIndex)
         let newString = issuesUrl.substringToIndex(index1)
         //newString.appendContentsOf("?q=sort: created")
-        print(newString)
         
         Alamofire.request(.GET, newString).responseJSON { response in
             

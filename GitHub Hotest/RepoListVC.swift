@@ -86,24 +86,26 @@ class RepoListVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
     func downloadReposData() {
-        
         Alamofire.request(.GET, requestUrl)
             .responseJSON { response in
                 if let items = response.result.value as? Dictionary<String, AnyObject> {
-                    var itemsArray = items["items"] as? Array<AnyObject>
-                    for var x = 0 ; x < itemsArray!.count ; x++ {
-                        if let repo = itemsArray![x] as? AnyObject {
-                            let repoName = repo["name"] as? String
-                            let repoDescription = repo["description"] as? String
-                            let contributorsUrl = repo["contributors_url"] as? String
-                            let issuesUrl = repo["issues_url"] as? String
-                            if let owner = repo["owner"] {
-                                let author = owner!["login"] as? String
-                                let avatarUrl = owner!["avatar_url"] as? String
-                                let repo = Repository(name: repoName!, avatarUrl: avatarUrl!, description: repoDescription!, author: author!, contributorsUrl: contributorsUrl!, issuesUrl: issuesUrl!)
-                                self.repositories.append(repo)
+                    if let itemsArray = items["items"] as? Array<AnyObject> {
+                        for var x = 0 ; x < itemsArray.count ; x++ {
+                            if let repo = itemsArray[x] as? AnyObject {
+                                let repoName = repo["name"] as? String
+                                let repoDescription = repo["description"] as? String
+                                let contributorsUrl = repo["contributors_url"] as? String
+                                let issuesUrl = repo["issues_url"] as? String
+                                if let owner = repo["owner"] {
+                                    let author = owner!["login"] as? String
+                                    let avatarUrl = owner!["avatar_url"] as? String
+                                    let repo = Repository(name: repoName!, avatarUrl: avatarUrl!, description: repoDescription!, author: author!, contributorsUrl: contributorsUrl!, issuesUrl: issuesUrl!)
+                                    self.repositories.append(repo)
+                                }
                             }
                         }
+                    } else {
+                        
                     }
                 }
           self.tableView.reloadData()
