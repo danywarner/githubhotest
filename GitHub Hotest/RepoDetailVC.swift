@@ -51,6 +51,7 @@ class RepoDetailVC: UIViewController {
     }
     
     func downloadContributors() {
+        print(repository.contributorsUrl)
         Alamofire.request(.GET, repository.contributorsUrl).responseJSON { response in
             
                 if let contributors = response.result.value as? Array<AnyObject> {
@@ -72,17 +73,35 @@ class RepoDetailVC: UIViewController {
         let index1 = issuesUrl.startIndex.advancedBy(intIndex)
         let newString = issuesUrl.substringToIndex(index1)
         //newString.appendContentsOf("?q=sort: created")
-        
+        print(newString)
         
         Alamofire.request(.GET, newString).responseJSON { response in
             
             if let issues = response.result.value as? Array<AnyObject> {
-                let issue1 = issues[0]["title"] as? String
-                let issue2 = issues[1]["title"] as? String
-                let issue3 = issues[2]["title"] as? String
-                self.issue1Lbl.text = issue1!
-                self.issue2Lbl.text = issue2!
-                self.issue3Lbl.text = issue3!
+                if issues.count >= 1 {
+                    let issue1 = issues[0]["title"] as? String
+                    self.issue1Lbl.text = issue1
+                } else {
+                    self.issue1Lbl.text = ""
+                }
+                
+                
+                if issues.count >= 2 {
+                    let issue2 = issues[1]["title"] as? String
+                    self.issue2Lbl.text = issue2
+                } else {
+                    self.issue2Lbl.text = ""
+                }
+                
+                if issues.count >= 3 {
+                    let issue3 = issues[2]["title"] as? String
+                    self.issue3Lbl.text = issue3
+                } else {
+                    self.issue3Lbl.text = ""
+                }
+                
+                
+                
             }
         }
     }
